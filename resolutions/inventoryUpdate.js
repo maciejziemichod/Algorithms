@@ -7,11 +7,12 @@ array. The returned inventory array should be in alphabetical order by item.
 */
 
 const updateInventory = (arr1, arr2) => {
+  let newArr = [].concat(arr1);
   // looping through elements in second array
   arr2.forEach((elem) => {
     let isFound = false;
     // checking whether there is already an item like that in first array
-    arr1.forEach((arr) => {
+    newArr.forEach((arr) => {
       if (arr.includes(elem[1])) {
         // when item is found it sums the quantities
         isFound = true;
@@ -20,16 +21,16 @@ const updateInventory = (arr1, arr2) => {
     });
     // item not found, adding it to first array
     if (!isFound) {
-      arr1.push(elem);
+      newArr.push(elem);
     }
   });
   // sorting
-  arr1 = arr1
+  newArr = newArr
     .map((elem) => elem.reverse())
     .sort()
     .map((elem) => elem.reverse());
 
-  return arr1;
+  return newArr;
 };
 
 // Example
