@@ -6,7 +6,9 @@ existing inventory item quantities (in arr1). If an item cannot be found, add th
 array. The returned inventory array should be in alphabetical order by item.
 */
 
-const updateInventory = (arr1, arr2) => {
+// v1
+
+const updateInventory1 = (arr1, arr2) => {
   let newArr = [].concat(arr1);
   // looping through elements in second array
   arr2.forEach((elem) => {
@@ -33,6 +35,29 @@ const updateInventory = (arr1, arr2) => {
   return newArr;
 };
 
+// v2
+
+const updateInventory2 = (arr1, arr2) => {
+  const concatArr = arr1
+    .concat(arr2)
+    .map((arr) => arr.reverse())
+    .sort()
+    .map((arr) => arr.reverse());
+  let resArr = [];
+  let lastItem = "";
+
+  concatArr.forEach((arr) => {
+    if (arr[1] === lastItem) {
+      resArr[resArr.length - 1][0] = resArr[resArr.length - 1][0] + arr[0];
+    } else {
+      lastItem = arr[1];
+      resArr.push(arr);
+    }
+  });
+  
+  return resArr;
+};
+
 // Example
 
 var curInv = [
@@ -49,4 +74,4 @@ var newInv = [
   [7, "Toothpaste"],
 ];
 
-console.log(updateInventory(curInv, newInv));
+console.log(updateInventory1(curInv, newInv));
